@@ -1,0 +1,73 @@
+* {
+	border: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+:root {
+	--bg: #e3e4e8;
+	--fg: #17181c;
+	font-size: calc(16px + (24 - 16) * (100vw - 320px) / (1280 - 320))
+}
+body {
+	background: var(--bg);
+	color: var(--fg);
+	display: grid;
+	font: 1em/1.5 "B612 Mono", monospace;
+	height: 100vh;
+	overflow: hidden;
+	place-items: center;
+}
+.pb {
+	--value: 0;
+	position: relative;
+	width: 15em;
+}
+.pb__fill, .pb__wrap, .pb__track {
+	width: 100%;
+}
+.pb__fill, .pb__wrap {
+	transition: transform 0.025s linear;
+}
+.pb__fill, .pb__track {
+	height: 1.5em;
+}
+.pb__fill {
+	background: #f3c623;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	transform: scaleX(var(--value));
+	transform-origin: 0 50%;
+}
+.pb__wrap {
+	transform: translateX(calc(100% * var(--value)));
+}
+.pb__value {
+	font-size: 2em;
+	text-align: center;
+	transform-origin: 50% 4.5rem;
+}
+.pb__track {
+	background: currentColor;
+	opacity: 0.15;
+	transform-origin: 50% 1.5em;
+}
+.pb--resetting .pb__fill,
+.pb--resetting .pb__wrap {
+	transition-duration: 0s;
+}
+.pb__wrap--falling .pb__value,
+.pb__wrap--falling .pb__track {
+	opacity: 0;
+	transform: translateY(10rem) rotate(80deg);
+	transition: all 1.5s ease-in;
+}
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg: #17181c;
+		--fg: #e3e4e8;
+	}
+}
